@@ -3,10 +3,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 import Form from "./component/form";
+import config from './config.js';
+
+
 // import dotenv from "dotenv";
 // import * as dotenv from "dotenv";
 // dotenv.config();
 // const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+
 const App = () => {
   const [city, setCity] = useState("");
   const [weatherData, setWeatherData] = useState(null);
@@ -24,8 +28,8 @@ const App = () => {
   };
 
   const fetchWeatherData = () => {
-    const apiKey = "7317f1f95397b4722b00199be2e48552";
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    // const apiKey = api_key;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.api_key}&units=imperial`;
 
     axios
       .get(apiUrl)
