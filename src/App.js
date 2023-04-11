@@ -1,64 +1,39 @@
-
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./App.css";
-import Form from "./component/form";
-import config from './config.js';
-
-
-// import dotenv from "dotenv";
-// import * as dotenv from "dotenv";
-// dotenv.config();
-// const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import ToDoList from "./component/ToDoList";
+import WeatherPage from "./component/WeatherPage";
+import HomePage from "./component/HomePage";
+import Welcome from "./component/Welcome";
+import NotFound from "./component/NotFound";
+import './index.css';
 
 const App = () => {
-  const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState(null);
-  const [currentTime, setCurrentTime] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date().toLocaleTimeString());
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const handleInputChange = (event) => {
-    setCity(event.target.value);
-  };
-
-  const fetchWeatherData = () => {
-    // const apiKey = api_key;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.api_key}&units=imperial`;
-
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setWeatherData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching weather data:", error);
-      });
+  const handleLogin = (userInfo) => {
+    setLoggedIn(true);
+    setUser(userInfo);
   };
 
   return (
-    <div>
-      <h1> Today's Weather</h1>
-      <input type="text" value={city} onChange={handleInputChange} />
-      <button onClick={fetchWeatherData}>Get Weather</button>
-      {weatherData === null ? (
-        <p>No weather data available</p>
-      ) : (
-        <div className="Container">
-          <h2>{weatherData.name}</h2>
-          <p>Temperature: {weatherData.main.temp}°F</p>
-          <p>Humidity: {weatherData.main.humidity}%</p>
-          <p>Wind Speed: {weatherData.wind.speed} mph</p>
-          <p>Description: {weatherData.weather[0].description}</p>
-          <p>Current Time: {currentTime}</p>
-        </div>
-      )}
-    </div>
+    <Router>
+      <div>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              loggedIn ? <HomePage name={user.name} /> : <Welcome onLogin={handleLogin} />
+            }
+          />
+          <Route path="/login" element={<Welcome onLogin={handleLogin} />} />
+          <Route path="/weather" element={<WeatherPage />} />
+          <Route path="/todo" element={<ToDoList />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 
