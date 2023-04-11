@@ -29,6 +29,7 @@ const App = () => {
           />
           <Route path="/login" element={<Welcome onLogin={handleLogin} />} />
           <Route path="/weather" element={<WeatherPage />} />
+          <Route path="/HomePage" element={<HomePage />} />
           <Route path="/todo" element={<ToDoList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
