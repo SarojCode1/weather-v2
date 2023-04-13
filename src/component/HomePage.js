@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import name from "./access/Register";
 
 const HomePage = ({ name }) => {
   return (
