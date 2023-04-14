@@ -11,20 +11,18 @@ const port = 5000;
 
 app.use(express.json());
 
-// const firstRoute = (req, res) => {
-//     console.log(req);
-//     res.send('Hello, World!');
-// };
-// app.get('/', firstRoute);
+
+app.get("/message", (req, res) => {
+    res.json({ message: "Hello from server!" });
+});
+
+
 const encryptPassword = async (password) => {
-
     const salt = await bcrypt.genSalt(11);
-
     const encrypted_password = await bcrypt.hash(password, salt);
-
     return encrypted_password;
-
 };
+
 
 app.post('/api/register', async (req, res) => {
     console.log(req.body);
