@@ -1,5 +1,5 @@
 export const getUsers = async () => {
-    const response = await fetch('/users');
+    const response = await fetch('/User');
     const data = await response.json();
     return data;
 }

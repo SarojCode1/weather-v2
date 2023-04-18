@@ -4,18 +4,14 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const cors = require('cors');
 
 
 const app = express();
-const port = 5000;
+const port = 4000;
 
 app.use(express.json());
-
-
-app.get("/message", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
-
+app.use(cors());
 
 const encryptPassword = async (password) => {
     const salt = await bcrypt.genSalt(11);
@@ -60,7 +56,15 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-mongoose.connect('mongodb+srv://sarojcode1:iEhp838nXZpiKCI3@products.lgc7fhd.mongodb.net/myapp', { useNewUrlParser: true, useUnifiedTopology: true })
+
+
+
+
+
+mongoose.connect('mongodb+srv://sarojcode1:iEhp838nXZpiKCI3@products.lgc7fhd.mongodb.net/myapp', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
     .then(() => console.log('MongoDB connected'))
     .catch((err) => console.log(err));
 

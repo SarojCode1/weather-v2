@@ -9,7 +9,7 @@ const WeatherPage = () => {
     const [weatherData, setWeatherData] = useState(null);
     const [currentDateTime, setCurrentDateTime] = useState("");
     const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
+    //  fix for the user input invalid city 
     const fetchWeatherData = () => {
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${config.api_key}&units=imperial`;
 

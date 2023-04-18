@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import { Link } from 'react-router-dom';
+import { loginReducer } from '../Reducer/LoginReducer';
 
 const Login = ({ history }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const [state, dispatch] = useReducer(loginReducer, { isLoggedIn: false });
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -15,8 +18,10 @@ const Login = ({ history }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // To validate the user info we have to check whether email and password match the credentials
+        // Dispatch the LOGIN_REQUEST action with the email and password
+        dispatch({ type: 'LOGIN_REQUEST', payload: { email, password } });
     };
+
 
     return (
         <div className="bg-gray-800 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -64,10 +69,10 @@ const Login = ({ history }) => {
                             </div>
                         </div>
 
-                        <div>
-                            <Link to="/HomePage" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Login
-                            </Link>
+                        <div
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Login
+
                         </div>
                     </form>
                     <div className="mt-6">

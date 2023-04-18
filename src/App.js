@@ -6,7 +6,8 @@ import HomePage from "./component/HomePage";
 import Welcome from "./component/access/Login";
 import NotFound from "./component/NotFound";
 import Register from "./component/access/Register";
-import Login from "./component/access/Login";
+import { Provider } from 'react-redux';
+import store from "./component/Reducer/store";
 
 import './index.css';
 
@@ -23,26 +24,21 @@ const App = () => {
   console.log(user);
 
   return (
-    <Router>
-      <div>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              loggedIn ? <HomePage name={user.name} /> : <Welcome onLogin={handleLogin} />
-            }
-          />
-          <Route path="/Register" element={<Register onLogin={handleLogin} />} />
+    <Provider store={store}>
+      <Router>
 
+        <Routes>
+          <Route exact path="/" element={loggedIn ? <HomePage name={user.name} /> : <Welcome onLogin={handleLogin} />} />
+          <Route path="/Register" element={<Register onLogin={handleLogin} />} />
           <Route path="/Login" element={<Welcome onLogin={handleLogin} />} />
           <Route path="/weather" element={<WeatherPage />} />
-          <Route path="/HomePage" element={<HomePage />} />
+          <Route path="/HomePage" element={<HomePage name={user.name} />} />
           <Route path="/todo" element={<ToDoList />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </div>
-    </Router>
+
+      </Router>
+    </Provider>
   );
 };
 
