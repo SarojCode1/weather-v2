@@ -44,7 +44,7 @@ export const registerUser = (name, email, password) => async (dispatch) => {
         dispatch(setName(name));
         dispatch(setEmail(email));
         dispatch(setPassword(password));
-
+        return response
     } catch (error) {
         dispatch(error.message);
     }

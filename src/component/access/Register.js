@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import Login from './Login';
 import { registerUser, } from '../Reducer/RegisterReducer'
 
-const Register = ({ history }) => {
+
+const Register = () => {
     const dispatch = useDispatch();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')

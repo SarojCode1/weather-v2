@@ -1,4 +1,4 @@
-
+import axios from "axios";
 
 const initialState = {
     email: '',
@@ -15,19 +15,15 @@ export const loginReducer = (state = initialState, action) => {
             return state;
     }
 };
+
 export const loginMiddleware = (store) => next => async (action) => {
     if (action.type === 'LOGIN_REQUEST') {
-        const { email, password } = store.getState().login;
+        const { email, password } = action.payload
+        console.log(email);
         try {
-            const response = await fetch('http://localhost:4000/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            });
-            const data = await response.json();
-            if (response.ok) {
+            const response = await axios.post('http://localhost:4000/api/login', { email, password });
+            console.log(response);
+            if (response.status === 200) {
                 // If authentication is successful, dispatch a success action
                 store.dispatch({ type: 'LOGIN_SUCCESS', payload: 'Authentication successful!' });
             } else {
@@ -42,6 +38,11 @@ export const loginMiddleware = (store) => next => async (action) => {
 
     return action;
 };
+
+
+
+
+
 
 
 

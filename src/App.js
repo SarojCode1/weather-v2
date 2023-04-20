@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ToDoList from "./component/content/ToDoList";
 import WeatherPage from "./component/content/WeatherPage";
-import HomePage from "./component/HomePage";
+import HomePage from "./component/content/HomePage";
 import Welcome from "./component/access/Login";
 import NotFound from "./component/NotFound";
 import Register from "./component/access/Register";
@@ -10,6 +10,7 @@ import { Provider } from 'react-redux';
 import store from "./component/Reducer/store";
 
 import './index.css';
+import Login from "./component/access/Login";
 
 
 const App = () => {
@@ -30,7 +31,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={loggedIn ? <HomePage name={user.name} /> : <Welcome onLogin={handleLogin} />} />
           <Route path="/Register" element={<Register onLogin={handleLogin} />} />
-          <Route path="/Login" element={<Welcome onLogin={handleLogin} />} />
+          <Route path="/Login" element={<Login loggedIn={loggedIn} handleLogin={handleLogin} setLoggedIn={setLoggedIn} />} />
           <Route path="/weather" element={<WeatherPage />} />
           <Route path="/HomePage" element={<HomePage name={user.name} />} />
           <Route path="/todo" element={<ToDoList />} />
