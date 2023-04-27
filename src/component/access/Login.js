@@ -13,7 +13,6 @@ const Login = ({ handleLogin, setLoggedIn, loggedIn }) => {
     // const state = useSelector(state => state.auth);
     const [error, setError] = useState('');
 
-
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     };
@@ -48,7 +47,6 @@ const Login = ({ handleLogin, setLoggedIn, loggedIn }) => {
     //         });
     //     }
     // }, [state.isLoggedIn, history]);
-
 
     return (
         <div className="bg-gray-800 min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">

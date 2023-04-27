@@ -82,7 +82,7 @@ const Register = () => {
                             <button
                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-600 mt-4"
                                 onClick={handleSubmit}>
-                                <Link to="/HomePage" className="">
+                                <Link to="/Login" className="">
                                     Register
                                 </Link>
                             </button>
